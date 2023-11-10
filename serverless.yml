@@ -1,0 +1,25 @@
+service: serverless-tickets
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  profile: david-mobapp
+  region: eu-north-1
+  iam: 
+    role: arn:aws:iam::626646945997:role/lectures-cloud
+
+plugins:
+ - serverless-webpack  
+
+package:
+  individually: true  
+
+functions:
+  getEvents:
+    handler: functions/getEvents/index.handler
+    events:
+      - httpApi:
+          path: '/events'
+          method: GET
+         
